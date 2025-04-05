@@ -14,7 +14,4 @@ Currex is a web application that allows users to convert currency values from on
 Featuresive Design: Adapts to various screen sizes.
 Technologies Used
 React
-
-Axios
-
 Tailwindcss
