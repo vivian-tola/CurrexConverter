@@ -7,7 +7,7 @@ import Blog from "./components/Blog";
 import Converter from "./components/Converter";
 import Footer from "./components/Footer";
 import { AuthProvider } from "./Contexts/AuthContext";
-import { ThemeProvider } from './contexts/ThemeContext';
+import { ThemeProvider } from './Contexts/ThemeContext';
 import "./App.css";
 
 function App() {
