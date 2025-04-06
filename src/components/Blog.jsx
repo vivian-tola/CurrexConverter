@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { getCurrencyRates } from "../services/currencyServices";
+import { useTheme } from '../Hooks/useTheme';
 
 function Blog() {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const { darkMode } = useTheme();
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -91,38 +93,37 @@ function Blog() {
 
   if (loading) {
     return (
+      <div className={`${darkMode ? 'bg-gray-900 text-white' : 'bg-white text-gray-900'} transition-colors duration-200 min-h-screen`}>
       <div className="container mx-auto px-4 py-8 text-center">
         <div className="text-xl">Loading blog posts...</div>
       </div>
+    </div>
     );
   }
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="mb-8 text-center">
-        <h1 className="text-3xl font-bold mb-2">Currency Market Blog</h1>
-        <p className="text-gray-600">
-          Daily updates on foreign exchange markets
-        </p>
-      </div>
-
-      <div className="max-w-4xl mx-auto">
-        {posts.map((post) => (
-          <div
-            key={post.id}
-            className="mb-8 bg-white rounded-lg shadow-md overflow-hidden"
-          >
-            <div className="p-6">
-              <div className="text-sm text-gray-500 mb-2">{post.date}</div>
-              <h2 className="text-2xl font-bold mb-2">{post.title}</h2>
-              <p className="text-gray-700 mb-4">{post.excerpt}</p>
-              <div
-                className="prose max-w-none"
-                dangerouslySetInnerHTML={{ __html: post.content }}
-              />
+    <div className={`${darkMode ? 'bg-gray-900 text-white' : 'bg-white text-gray-900'} transition-colors duration-200 min-h-screen`}>
+      <div className="container mx-auto px-4 py-8">
+        <div className="mb-8 text-center">
+          <h1 className="text-3xl font-bold mb-2">Currency Market Blog</h1>
+          <p className={`${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>Daily updates on foreign exchange markets</p>
+        </div>
+        
+        <div className="max-w-4xl mx-auto">
+          {posts.map(post => (
+            <div key={post.id} className={`mb-8 ${darkMode ? 'bg-gray-800' : 'bg-white'} rounded-lg shadow-md overflow-hidden transition-colors duration-200`}>
+              <div className="p-6">
+                <div className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'} mb-2`}>{post.date}</div>
+                <h2 className="text-2xl font-bold mb-2">{post.title}</h2>
+                <p className={`${darkMode ? 'text-gray-300' : 'text-gray-700'} mb-4`}>{post.excerpt}</p>
+                <div 
+                  className={`prose max-w-none ${darkMode ? 'prose-invert' : ''}`}
+                  dangerouslySetInnerHTML={{ __html: post.content }}
+                />
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   );
